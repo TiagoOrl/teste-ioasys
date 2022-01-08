@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Ioasys Client</string>
+    <string name="login_main">BEM-VINDO AO EMPRESAS</string>
+    <string name="lorem_ipsum">orem Ipsum é simplesmente uma simulação de texto da indústria tipográfica e de impressos,
+        e vem sendo utilizado desde o século XVI</string>
+    <string name="email">E-mail</string>
+    <string name="senha">senha</string>
+    <string name="entrar">ENTRAR</string>
+</resources>
