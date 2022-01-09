@@ -28,6 +28,6 @@ data class Enterprise(
     @SerializedName("country")
     val country: String,
 
-    @SerializedName("enterprise_type_name")
+    @SerializedName("enterprise_type")
     val enterpriseType: EnterpriseType
 )

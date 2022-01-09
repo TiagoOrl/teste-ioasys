@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.assemblermaticstudio.ioasysclient.R
 import com.assemblermaticstudio.ioasysclient.model.enterprise.Enterprise
 import com.bumptech.glide.Glide
+import java.text.MessageFormat
 
 class EnterprisesListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -47,13 +48,13 @@ class EnterprisesListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         fun bind(enterprise: Enterprise) {
             Glide
                 .with(itemView.context)
-                .load(enterprise.photo)
+                .load("https://empresas.ioasys.com.br" + enterprise.photo)
                 .error(R.drawable.ic_eye_on)
                 .into(imgView)
 
             companyName.text = enterprise.name
             companyType.text = enterprise.enterpriseType.typeName
-            country.text = String.format("{0}, {1]", enterprise.city, enterprise.country)
+            country.text = MessageFormat.format("{0}, {1}", enterprise.city, enterprise.country)
         }
     }
 }

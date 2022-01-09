@@ -9,12 +9,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.assemblermaticstudio.ioasysclient.R
 import com.assemblermaticstudio.ioasysclient.utils.createDialog
 import com.assemblermaticstudio.ioasysclient.utils.createProgressDialog
+import com.assemblermaticstudio.ioasysclient.utils.hideSoftKeyboard
+import com.assemblermaticstudio.ioasysclient.view.EnterprisesListAdapter
 import com.assemblermaticstudio.ioasysclient.view.viewmodels.SearchViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class SearchFragment : Fragment() {
+class SearchFragment : Fragment(), SearchView.OnQueryTextListener {
 
     lateinit var fragment: View
+    private val enterprisesAdapter: EnterprisesListAdapter by lazy { EnterprisesListAdapter() }
     private val viewModel by viewModel<SearchViewModel>()
     private val dialog by lazy { requireContext().createProgressDialog() }
 
@@ -26,6 +29,7 @@ class SearchFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         fragment = inflater.inflate(R.layout.search_fragment, container, false)
+        setHasOptionsMenu(true)
         initViews()
         startViewModel()
         return fragment
@@ -33,9 +37,26 @@ class SearchFragment : Fragment() {
 
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
         requireActivity().menuInflater.inflate(R.menu.main_menu, menu)
         val menuItem = menu.findItem(R.id.search_menu)
         val searchView = menuItem.actionView as SearchView
+        searchView.isSubmitButtonEnabled = true
+        searchView.setOnQueryTextListener(this)
+    }
+
+
+    override fun onQueryTextSubmit(p0: String?): Boolean {
+        fragment.hideSoftKeyboard()
+        if (p0 != null)
+            viewModel.queryEnterprises(p0)
+        return true
+    }
+
+    override fun onQueryTextChange(p0: String?): Boolean {
+//        if (p0 != null)
+//            viewModel.queryEnterprises(p0)
+        return true
     }
 
 
@@ -43,6 +64,7 @@ class SearchFragment : Fragment() {
         // init recycler  view
         containerRv = fragment.findViewById(R.id.container_rv)
         containerRv.layoutManager = LinearLayoutManager(requireActivity())
+        containerRv.adapter = enterprisesAdapter
 
     }
 
@@ -64,20 +86,16 @@ class SearchFragment : Fragment() {
 
                 is SearchViewModel.State.Success -> {
                     dialog.dismiss()
+                    enterprisesAdapter.submitList(it.dataObject!!.enterpriseList)
+                    enterprisesAdapter.notifyDataSetChanged()
                     viewModel.setIdleState()
                 }
-
-
             }
         }
     }
 
 
-
-
-
     companion object {
         fun newInstance() : SearchFragment = SearchFragment()
     }
-
 }
