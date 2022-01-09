@@ -3,7 +3,8 @@ package com.assemblermaticstudio.ioasysclient.di
 import android.util.Log
 import com.assemblermaticstudio.ioasysclient.repository.ApiAccess
 import com.assemblermaticstudio.ioasysclient.service.ApiConnection
-import com.assemblermaticstudio.ioasysclient.view.LoginViewModel
+import com.assemblermaticstudio.ioasysclient.view.viewmodels.LoginViewModel
+import com.assemblermaticstudio.ioasysclient.view.viewmodels.SearchViewModel
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -56,11 +57,14 @@ object Modules {
     }
 
 
+    // ViewModels dependency objects
     private fun presentationModule() : Module {
         return module {
             viewModel { LoginViewModel(get()) }
+            viewModel { SearchViewModel(get()) }
         }
     }
+
 
 
     private inline fun <reified T> createService(okHttpClient: OkHttpClient, gsonConverterFactory: GsonConverterFactory): T {

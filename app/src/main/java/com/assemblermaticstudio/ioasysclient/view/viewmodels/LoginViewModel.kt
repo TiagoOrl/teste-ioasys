@@ -1,6 +1,5 @@
-package com.assemblermaticstudio.ioasysclient.view
+package com.assemblermaticstudio.ioasysclient.view.viewmodels
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -8,7 +7,6 @@ import androidx.lifecycle.viewModelScope
 import com.assemblermaticstudio.ioasysclient.Auth
 import com.assemblermaticstudio.ioasysclient.model.user.User
 import com.assemblermaticstudio.ioasysclient.repository.ApiAccess
-import kotlinx.coroutines.currentCoroutineContext
 import kotlinx.coroutines.launch
 
 class LoginViewModel(private val apiAccess: ApiAccess) : ViewModel() {

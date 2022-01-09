@@ -1,6 +1,5 @@
 package com.assemblermaticstudio.ioasysclient.view.fragment
 
-import android.content.Context
 import android.os.Bundle
 import android.text.method.PasswordTransformationMethod
 import android.view.LayoutInflater
@@ -15,7 +14,7 @@ import com.assemblermaticstudio.ioasysclient.R
 import com.assemblermaticstudio.ioasysclient.utils.createDialog
 import com.assemblermaticstudio.ioasysclient.utils.createProgressDialog
 import com.assemblermaticstudio.ioasysclient.utils.hideSoftKeyboard
-import com.assemblermaticstudio.ioasysclient.view.LoginViewModel
+import com.assemblermaticstudio.ioasysclient.view.viewmodels.LoginViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -79,6 +78,7 @@ class LoginFragment : Fragment() {
 
         viewModel.output.observe(viewLifecycleOwner) {
             when(it) {
+
                 LoginViewModel.State.Loading -> dialog.show()
 
                 is LoginViewModel.State.Error -> {
@@ -94,6 +94,7 @@ class LoginFragment : Fragment() {
                     FragmentDirector.replace(requireActivity().supportFragmentManager, searchFragment)
                     viewModel.setIdleState()
                 }
+                else -> { viewModel.setIdleState() }
             }
         }
     }
