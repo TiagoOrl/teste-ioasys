@@ -17,21 +17,12 @@ import com.assemblermaticstudio.ioasysclient.utils.createProgressDialog
 import com.assemblermaticstudio.ioasysclient.utils.hideSoftKeyboard
 import com.assemblermaticstudio.ioasysclient.view.LoginViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import android.net.NetworkInfo
-
-import androidx.core.content.ContextCompat.getSystemService
-
-import android.net.ConnectivityManager
-import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.getSystemService
-
-
-
 
 
 class LoginFragment : Fragment() {
 
     lateinit var fragment: View
+    lateinit var searchFragment: SearchFragment
 
     lateinit var passwordEt: EditText
     lateinit var emailEt: EditText
@@ -49,8 +40,15 @@ class LoginFragment : Fragment() {
     ): View? {
         fragment = inflater.inflate(R.layout.login_fragment, container, false)
         initViews()
+        initFragments()
         return fragment
     }
+
+
+    private fun initFragments() {
+        searchFragment = SearchFragment.newInstance()
+    }
+
 
     private fun initViews() {
 
@@ -93,6 +91,8 @@ class LoginFragment : Fragment() {
                 is LoginViewModel.State.Success -> {
                     dialog.dismiss()
                     Toast.makeText(requireContext(), "Login OK", Toast.LENGTH_SHORT).show()
+                    FragmentDirector.replace(requireActivity().supportFragmentManager, searchFragment)
+                    viewModel.setIdleState()
                 }
             }
         }

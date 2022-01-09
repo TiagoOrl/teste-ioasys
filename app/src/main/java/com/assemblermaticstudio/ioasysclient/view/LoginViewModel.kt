@@ -41,7 +41,6 @@ class LoginViewModel(private val apiAccess: ApiAccess) : ViewModel() {
                 _output.postValue(State.Error("Erro com as credenciais, tente novamente."))
             }
 
-
             if (responseUser.code() in 402..499) {
                 _output.postValue(State.Error("Erro ao realizar o login, tente novamente."))
             }
@@ -49,10 +48,14 @@ class LoginViewModel(private val apiAccess: ApiAccess) : ViewModel() {
     }
 
 
+    fun setIdleState() {
+        _output.postValue(State.Idle)
+    }
+
     sealed class State {
+        object Idle: State()
         object Loading : State()
         data class Success(val dataObject: User?) : State()
-//        data class SuccessQueryDB(val dataObject: List<GIF>) : State()
         data class Error(val msg: String) : State()
     }
 }

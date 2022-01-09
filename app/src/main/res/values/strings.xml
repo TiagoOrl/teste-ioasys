@@ -6,4 +6,5 @@
     <string name="email">E-mail</string>
     <string name="senha">senha</string>
     <string name="entrar">ENTRAR</string>
+    <string name="buscar">buscar</string>
 </resources>

@@ -21,4 +21,12 @@ class MainActivity : AppCompatActivity() {
     private fun initFragments() {
         loginFragment = LoginFragment.newInstance()
     }
+
+    override fun onBackPressed() {
+        if (supportFragmentManager.fragments.size == 1)
+            FragmentDirector.replace(supportFragmentManager, loginFragment)
+        else
+            supportFragmentManager.popBackStackImmediate()
+
+    }
 }

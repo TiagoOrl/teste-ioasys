@@ -5,7 +5,9 @@
       <map>
         <entry key="app/src/main/res/drawable/bg_btn.xml" value="0.22083333333333333" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.365625" />
-        <entry key="app/src/main/res/layout/login_fragment.xml" value="0.5103734439834025" />
+        <entry key="app/src/main/res/layout/login_fragment.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/search_fragment.xml" value="0.25" />
+        <entry key="app/src/main/res/menu/menu_search.xml" value="0.2" />
       </map>
     </option>
   </component>
