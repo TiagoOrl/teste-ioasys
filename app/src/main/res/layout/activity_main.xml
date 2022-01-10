@@ -4,10 +4,106 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#F8F5E3"
     tools:context=".view.MainActivity">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/main_logo"
+        android:src="@drawable/logo_ioasys"
+        android:layout_width="200dp"
+        android:layout_height="100dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="30dp"/>
+
+    <TextView
+        android:id="@+id/login_mainTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/main_logo"
+        app:layout_constraintStart_toStartOf="@id/main_logo"
+        app:layout_constraintEnd_toEndOf="@id/main_logo"
+        android:layout_marginTop="20dp"
+        android:text="@string/login_main"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        />
+
+    <TextView
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/login_mainTv"
+        app:layout_constraintEnd_toEndOf="@id/login_mainTv"
+        app:layout_constraintStart_toStartOf="@id/login_mainTv"
+        android:layout_marginTop="10dp"
+        android:textSize="12sp"
+        android:text="@string/lorem_ipsum"/>
+
+    <TextView
+        android:id="@+id/login_errMsgTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/emailEt"
+        app:layout_constraintBottom_toTopOf="@id/emailEt"
+        android:textSize="11sp"
+        android:textColor="#FF3737"
+        />
+
+    <EditText
+        android:id="@+id/emailEt"
+        android:layout_width="260dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/passwordEt"
+        app:layout_constraintEnd_toEndOf="@id/passwordEt"
+        app:layout_constraintStart_toStartOf="@id/passwordEt"
+        android:layout_marginBottom="30dp"
+        android:hint="@string/email"
+        android:inputType="textEmailAddress"
+        android:autofillHints="user@mail.com" />
+
+    <EditText
+        android:id="@+id/passwordEt"
+        android:layout_width="260dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/loginBtn"
+        app:layout_constraintEnd_toEndOf="@id/loginBtn"
+        app:layout_constraintStart_toStartOf="@id/loginBtn"
+        android:layout_marginBottom="30dp"
+        android:hint="@string/senha"
+        android:inputType="textPassword"
+        android:autofillHints="user@mail.com"/>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/passwordDisplayBtn"
+        android:tint="#4C4C4C"
+        android:src="@drawable/ic_eye_on"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="5dp"
+        app:layout_constraintEnd_toEndOf="@id/passwordEt"
+        app:layout_constraintTop_toTopOf="@id/passwordEt"
+        app:layout_constraintBottom_toBottomOf="@+id/passwordEt"
+        />
+
+    <TextView
+        android:id="@+id/loginBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_btn"
+        android:elevation="3dp"
+        android:paddingVertical="8dp"
+        android:paddingHorizontal="40dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginBottom="90dp"
+        android:text="@string/entrar"
+        android:textSize="20sp"/>
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragment_container"
+        android:elevation="4dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintTop_toTopOf="parent"

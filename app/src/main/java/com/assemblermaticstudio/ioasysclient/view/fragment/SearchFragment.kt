@@ -17,7 +17,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class SearchFragment : Fragment(), SearchView.OnQueryTextListener {
 
     lateinit var fragment: View
-    private val enterprisesAdapter: EnterprisesListAdapter by lazy { EnterprisesListAdapter() }
+    private val enterprisesAdapter: EnterprisesListAdapter by lazy { EnterprisesListAdapter(requireActivity().supportFragmentManager) }
     private val viewModel by viewModel<SearchViewModel>()
     private val dialog by lazy { requireContext().createProgressDialog() }
 

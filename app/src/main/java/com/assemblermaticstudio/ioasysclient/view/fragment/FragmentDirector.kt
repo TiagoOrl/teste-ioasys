@@ -9,7 +9,9 @@ object FragmentDirector {
         fragmentManager.beginTransaction()
             .addToBackStack(null)
             .setCustomAnimations(R.anim.enter_slide, R.anim.exit_slide, R.anim.enter_slide, R.anim.exit_slide)
-            .add(R.id.fragment_container, fragment).commit()
+            .add(R.id.fragment_container, fragment)
+            .commit()
+        fragmentManager.executePendingTransactions()
     }
 
     fun replace(fragmentManager: FragmentManager, fragment: Fragment) {
@@ -18,5 +20,11 @@ object FragmentDirector {
             .addToBackStack(null)
             .setCustomAnimations(R.anim.enter_slide, R.anim.exit_slide, R.anim.enter_slide, R.anim.exit_slide)
             .commit()
+        fragmentManager.executePendingTransactions()
+    }
+
+    fun popStack(fragmentManager: FragmentManager) {
+        fragmentManager.popBackStack()
+        fragmentManager.executePendingTransactions()
     }
 }

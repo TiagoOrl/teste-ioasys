@@ -5,13 +5,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.assemblermaticstudio.ioasysclient.R
 import com.assemblermaticstudio.ioasysclient.model.enterprise.Enterprise
+import com.assemblermaticstudio.ioasysclient.view.fragment.DetailsFragment
+import com.assemblermaticstudio.ioasysclient.view.fragment.FragmentDirector
 import com.bumptech.glide.Glide
 import java.text.MessageFormat
 
-class EnterprisesListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class EnterprisesListAdapter(private val fragmentManager: FragmentManager) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var enterprisesList: List<Enterprise> = mutableListOf()
 
@@ -40,10 +43,11 @@ class EnterprisesListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     inner class EnterpriseViewHolder constructor(
         itemView: View
     ) : RecyclerView.ViewHolder(itemView) {
-        val imgView = itemView.findViewById<ImageView>(R.id.card_img)
-        val companyName = itemView.findViewById<TextView>(R.id.companyNameTv)
-        val companyType = itemView.findViewById<TextView>(R.id.businessTypeTv)
-        val country = itemView.findViewById<TextView>(R.id.countryNameTv)
+        val imgView : ImageView = itemView.findViewById<ImageView>(R.id.card_img)
+        val companyName : TextView = itemView.findViewById<TextView>(R.id.companyNameTv)
+        val companyType : TextView = itemView.findViewById<TextView>(R.id.businessTypeTv)
+        val country : TextView = itemView.findViewById<TextView>(R.id.countryNameTv)
+        private val detailsFragment : DetailsFragment = DetailsFragment.newInstance()
 
         fun bind(enterprise: Enterprise) {
             Glide
@@ -55,6 +59,17 @@ class EnterprisesListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             companyName.text = enterprise.name
             companyType.text = enterprise.enterpriseType.typeName
             country.text = MessageFormat.format("{0}, {1}", enterprise.city, enterprise.country)
+
+            itemView.setOnClickListener {
+                detailsFragment.setFragmentData(
+                    enterprise.name,
+                    enterprise.enterpriseType.typeName,
+                    MessageFormat.format("{0}, {1}", enterprise.city, enterprise.country),
+                    enterprise.description,
+                    "https://empresas.ioasys.com.br" + enterprise.photo
+                )
+                FragmentDirector.replace(fragmentManager, detailsFragment)
+            }
         }
     }
 }
